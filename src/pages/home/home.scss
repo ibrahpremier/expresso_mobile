@@ -1,0 +1,55 @@
+page-home {
+    
+    ion-card-content{
+        padding: 10px 0 !important;
+        min-height: 70px;
+    }
+    
+
+
+    .card{
+        border-radius: 10px;
+        margin: 2px auto;
+        width: 95%;
+    } 
+
+    ion-scroll { 
+        white-space: nowrap; 
+        height: 40px;
+    }
+
+    .thumbnail{
+        width: 50px;
+        height: 50px;
+        border-radius: 20px;
+    }
+    
+    #btnShare img{
+        width: 30px;
+    }
+    #btnPlay img{
+        width: 30px;
+    }
+
+    #fullLoader img{
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    #categorieScroll img{
+        width: 30px;
+    }
+    
+    #head{
+        background: #ccc;
+        border-radius: 20px;
+    }
+    #titre{
+        font-size: 40px !important;
+        color:#fff !important;
+    }
+    .menuScroll{
+        background: #FFEB3B;
+    }
+}
+

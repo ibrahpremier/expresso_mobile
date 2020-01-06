@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar>
+    <ion-row id="head" >
+        <ion-col col-10><ion-title id="titre">{{selectedCategorieName}}</ion-title></ion-col>
+        <ion-col col-2><button ion-button right menuToggle><ion-icon name="menu"></ion-icon></button></ion-col>
+    </ion-row>
+    
+    <ion-searchbar animated="true" placeholder="rechercher" autocomplete="true" (ionInput)="rechercher($event)"></ion-searchbar>
+  </ion-toolbar>
+   
+  <ion-navbar id="categorieScroll">
+    <ion-scroll scrollX="true">
+        <button class="menuScroll"  ion-button (click)="changeCategorie('tout')" color="light" round small>Tout</button>
+        <button  *ngFor="let c of categorieList" class="menuScroll" ion-button (click)="changeCategorie( c.titre_categorie)" color="light" round small >{{c.titre_categorie}}</button> 
+        <button  *ngIf="isFirstLoading==1" ion-button class="menuScroll" round small><img src="assets/imgs/spinner.gif" ></button>
+    </ion-scroll>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+        <!-- LISTE DES EXPRESSO -->
+    <ion-card class="card" *ngFor="let item of expressoList">
+        <ion-card-content>
+          <ion-row>
+            <ion-col col-3>  
+              <!-- BTN PLAY-->
+              <ion-fab left middle>
+                  <button ion-fab id="btnPlay"  *ngIf="isReading != item.id_expresso && urlLocal[item.id_expresso] == null" color="light" (click)="telecharger(item.fichier_expresso, item.id_expresso,'play')">
+                    <img *ngIf="loadingPlay == item.id_expresso" src="assets/imgs/spinner.gif" >
+                    <ion-icon name="arrow-dropright"></ion-icon></button> 
+              </ion-fab>
+              <!-- BTN PLAY green-->
+              <ion-fab left middle>
+                  <button ion-fab id="btnPlay"  *ngIf="isReading != item.id_expresso && urlLocal[item.id_expresso] != null" (click)="telecharger(item.fichier_expresso, item.id_expresso,'play')">
+                    <img *ngIf="loadingPlay == item.id_expresso" src="assets/imgs/spinner.gif" >
+                    <ion-icon name="arrow-dropright"></ion-icon></button>
+              </ion-fab>
+              <!-- BTN STOP-->
+              <ion-fab left middle>
+                <button ion-fab color="light" *ngIf="isReading == item.id_expresso " (click)="stopAudio()">
+                  <ion-icon name="square"></ion-icon>
+                </button>
+              </ion-fab>
+          </ion-col>
+              <!-- CORPS-->
+          <ion-col col-6>
+              <p>{{item.titre_expresso}}</p> 
+              <ion-badge color="danger" round><ion-icon name="share-alt" ></ion-icon> {{item.nombre_partage}}</ion-badge>
+              <ion-badge round>{{item.titre_categorie}}</ion-badge>
+          </ion-col>
+          <ion-col col-3 text-right>
+              <!-- BTN SHARE-->
+              <ion-fab right middle>
+                  <button ion-fab id="btnShare" color="secondary" (click)="telecharger(item.fichier_expresso, item.id_expresso,'share')">
+                    <img *ngIf="loadingShare == item.id_expresso" src="assets/imgs/spinner.gif" >
+                    <ion-icon name="md-share"></ion-icon>
+                  </button>
+              </ion-fab>
+          </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- SPINNER CHARGEMENT EXPRESSO -->
+      <ion-grid id="fullLoader" *ngIf="isFirstLoading==1">
+          <img src="assets/imgs/spinner.gif" >
+    </ion-grid>
+
+    <!-- CONTENT PAS DE CONNEXION INTERNET -->
+    <ion-grid *ngIf="!expressoList && isFirstLoading==0">
+      <ion-row>
+        <ion-col col-12> 
+          <img src="assets/imgs/nointernet.png" >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 padding>
+            <p>Connectez-vous à internet puis <b>RECHARGER</b></p>
+          <!-- <p><em text-danger>Une fois charger les EXPRESSO sont disponibles <b  color="danger">hors-ligne</b></em> </p> -->
+            <button ion-button (click)="recharger()" block >Recharger</button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
+</ion-content>

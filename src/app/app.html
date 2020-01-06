@@ -1,0 +1,55 @@
+<ion-menu [content]="content">
+  <ion-header >
+    <ion-toolbar>
+      <ion-title class="menuTitre">Expresso </ion-title>
+        <img class="menuAvatar" src="assets/imgs/logo.png">
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+
+      <!-- <button menuClose  (click)="selectCategorie(-1)" ion-item color="danger">
+          <ion-icon name="arrow-dropright"></ion-icon>&nbsp;&nbsp; 
+            TOUT 
+        </button> -->
+
+        <button menuClose  (click)="selectCategorie(-99)" ion-item clear>
+          <ion-icon name="arrow-dropright"></ion-icon>&nbsp;&nbsp; 
+            TOUT
+        </button>
+        
+        <button menuClose  (click)="selectCategorie(-2)" ion-item clear>
+          <ion-icon name="arrow-dropright"></ion-icon>&nbsp;&nbsp; 
+          TOP PARTAGE 
+        </button>
+
+        <button ion-item clear>
+          <ion-icon name="arrow-dropright"></ion-icon>&nbsp;&nbsp; 
+          SUGGESTION (Bientôt) 
+        </button>
+
+        <button menuClose  (click)="selectCategorie(-3)" ion-item  color="secondary">
+          <ion-icon name="arrow-dropright"></ion-icon>&nbsp;&nbsp; 
+            METTRE À JOUR
+        </button>
+
+    <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">{{p.title}}</button> -->
+    <br><br><br><br>
+
+        <!-- <button menuClose ion-item ><ion-icon name="arrow-dropright"></ion-icon> A Propos</button> -->
+     <button id="info" small ion-item>
+      <p>
+        &copy; copyright Digital-co.ci Jan 2018
+        <br>(+225) 58 695 629
+        <br> infos@digital-co.ci
+      </p>
+     </button>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
